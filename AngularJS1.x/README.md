@@ -1,38 +1,53 @@
-# AngularJS
-MVVM
-MVC
-AngularJS、Vue、React 三者都是数据驱动设计模式
+# AngularJS 1.x
+本教程主要是针对 AngularJS 1.5 和 1.6 进行开展，因为 2.0 以后的版本有了非常大的变化，所以单独放到另一个教程中讲解
 
-## AngularJS 和 Vue 的区别
-1. Vue 的作用域是实例化一个 Vue 的实例并挂载到指定的元素
-2. AngularJS 的作用域直接在指定元素上添加指令 ng-app 即可，一个页面有且仅有一个 ng-app 指令，也就是说一个页面只能有一个 AngularJS 的作用域
-AngularJS 可以有多个 Controller， 但是 Controller 之间不能嵌套
+# 技术目录
+- 作用域和表达式
+- 控制器
+- 数据绑定
+- 指令
+- 循环
+- 过滤器
+- 表单
+- 依赖注入
+- 服务
+- 自定义指令
+- 路由
 
+# 作用域和表达式
 
-
-## 指令
-
+## 作用域
+使用 AnuglarJS 前必须得明确一块区域作为有效的作用域，超出这个作用域的所有 AngluarJS 相关指令和表达式都不会生效。AngularJS 对作用域的声明就是在一个容器元素中加入根指令 ng-app
 ```html
-    <div id="app">
-        <p v-show="1 == 1" dk-show=" 1 == 1"></p>
-        <h1>{{1 + 1}}</h1>
-    </div>
-
+    <body ng-app>
+        <p>有指令 ng-app 的元素区域即是 AngularJS 的作用域</p>
+    </body>
 ```
-```javascript
-    var vm = new Vue({
-        el: '#app'
-    })
-```
+根指令 ng-app 可以加入到任意一个元素当中去，一个页面有且仅有一个根指令 ng-app
 
+## 表达式
+AngularJS 的表达式是写在双花括号当中：{{expression}}，表达式可以是任意 JS 的表达式，最终将表达式的结果输出到 HTML 指定的元素当中
 ```html
-    <div ng-app>
-
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--使用 AngularJS 前必须先引入库文件-->
+        <script type="text/javascript" src="./libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app>
+        <!--结果将会输出 2-->
+        <p>{{1 + 1}}</p>
+        <!--ng-init 等同于在 js 中定义了一个对象 myObj-->
+        <div ng-init="myObj = {name: 'DK', age: 18}">
+            <!--结果将输出 DK-->
+            <p>{{name}}</p>
+            <!--结果将输出 18-->
+            <p>{{age}}</p>
+        </div>
+    </body> 
+</html>    
 ```
-```javascript
-```
-
-## 服务
-1. $scope
-2. $http
+[效果预览]()

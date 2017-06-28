@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="./libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app>
+        <!--结果将会输出 2-->
+        <p>{{1 + 1}}</p>
+        <!--ng-init 等同于在 js 中定义了一个对象 myObj-->
+        <div ng-init="myObj = {name: 'DK', age: 18}">
+            <!--结果将输出 DK-->
+            <p>{{name}}</p>
+            <!--结果将输出 18-->
+            <p>{{age}}</p>
+        </div>
+    </body> 
+</html>
