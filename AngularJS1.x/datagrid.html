@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="./libs/angular/angular.min.js"></script>
+        <script type="text/javascript" src="./libs/jquery/jquery-2.1.1.min.js"></script>
+    </head>
+    <body ng-app="dkApp" ng-controller="dkController">
+        <p ng-init="name = 'Tom'" ng-bind="name"></p>
+		<div>
+			<div class="col-sm-3"><label>username：<input type="text" ng-model="username"></label></div>
+			<div class="col-sm-3"><label>phone：<input type="text" ng-model="phone"></label></div>
+			<div class="col-sm-3"><label>mail：<input type="text" ng-model="mail"></label></div>
+			<div class="col-sm-3"><input type="button" class="btn btn-info" value="搜索" ng-click="search"></div>
+		</div>        
+        <div class="bs-example" data-example-id="simple-table" >
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>行号</th>
+                        <!--v-for="(value, key) in dataset[0]"-->
+                        <th ng-repeat="(key, value) in dataset[0]" ng-bind="key"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  class="active" ng-repeat="obj in dataset">
+                        <td ng-bind="$index + 1"></td>
+                        <td ng-repeat="(key, value) in obj" ng-bind="key == 'sex' ? (value == 1 ? '男' : '女') : value"></td>
+                    </tr>
+                </tbody>
+            </table>             
+        </div>
+        <script type="text/javascript">
+            var dkApp = angular.module('dkApp', []);
+            dkApp.controller('dkController', ['$scope', '$http', function($scope, $http){
+                $scope.dataset = [{name: 'Tom', sex: 1, age: 18}, {name: 'Lucy', sex: 0, age: 28}];
+                $http.get('http://10.3.133.12/course/api/api/student/FetchAllStudent').success(function(response){
+                    console.log(response);
+                    $scope.dataset = response.data;
+                })
+
+                // $.get('http://10.3.133.12/course/api/api/student/FetchAllStudent', function(response){
+                //     $scope.dataset = response.data;
+                //     console.log($scope)
+                //     $scope
+                // })
+            }])
+
+            // new Vue({
+            //     data: {
+            //         dataset: []
+            //     }
+            // })
+        </script>
+    </body>
+</html>

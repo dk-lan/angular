@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="./libs/angular/angular.min.js"></script>
+        <script type="text/javascript" src="./libs/angular/angular-sanitize.min.js"></script>
+    </head>
+    <body>
+        <div ng-app="dkApp" >
+            <div ng-controller="dkController">
+                <h1>{{1 + 1}}</h1>
+                <h1>{{2 + 2}}</h1>
+                <img src="./libs/imgs/green.jpg">
+                <img src="{{src}}">
+            </div>
+            <div ng-controller="dkController1">
+                <img :src="src" :flag="1 == 1 ? 'a': 'b'" />
+                <img src="{{src}}" flag="{{1 == 1 ? 'a': 'b'}}"/>
+                <h1 ng-bind="1 + 1"></h1>
+                <div ng-bind-html="html"></div>
+                <input type="button" name="" value="click" ng-click="say(1, $event)">
+            </div>            
+        </div>
+
+        <script type="text/javascript">
+            //*****
+            var dkApp = angular.module('dkApp', ['ngSanitize']);
+            //*****
+            dkApp.controller('dkController', ['$scope', function($scope){
+                $scope.src= "./libs/imgs/green.jpg";
+            }])
+
+            dkApp.controller('dkController1', ['$scope', function($scope){
+                $scope.src= "./libs/imgs/red.jpg";
+                $scope.html = "<h1>123</h1>";
+                $scope.say = function(n, event){
+                    console.log(event.target)
+                }
+            }])            
+        </script>
+    </body>
+</html>
