@@ -3,8 +3,8 @@
 
 # 技术目录
 - 作用域和表达式
-- 控制器
-- 数据绑定
+- [控制器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/controller?_blank)
+- [数据绑定](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/databind?_blank)
 - 指令
 - 循环
 - 过滤器
@@ -17,7 +17,10 @@
 # 作用域和表达式
 
 ## 作用域
-使用 AnuglarJS 前必须得明确一块区域作为有效的作用域，超出这个作用域的所有 AngluarJS 相关指令和表达式都不会生效。AngularJS 对作用域的声明就是在一个容器元素中加入根指令 ng-app
+使用 AnuglarJS 前必须得明确一块区域作为有效的作用域，超出这个作用域的所有 AngluarJS 相关指令和表达式都不会生效。
+
+AngularJS 对作用域的声明就是在一个容器元素中加入根指令 ng-app
+
 ```html
     <body ng-app>
         <p>有指令 ng-app 的元素区域即是 AngularJS 的作用域</p>
@@ -50,4 +53,4 @@ AngularJS 的表达式是写在双花括号当中：{{expression}}，表达式�
     </body> 
 </html>    
 ```
-[效果预览]()
+[效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/expression.html?_blank)

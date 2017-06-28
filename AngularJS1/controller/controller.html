@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>单个打控制器</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <!--结果会显示 $scope.user.name 的值 Tom-->
+        <p>{{user.name}}</p>
+        <!--结果会显示 $scope.user.age 的值 22-->
+        <p>{{user.age}}</p>
+
+        <script type="text/javascript">
+            var myApp = angular.module('myApp', []);
+            myApp.controller('myController', ['$scope', function($scope){
+                $scope.user = {
+                    name: 'Tom',
+                    age: 22
+                }
+            }])
+        </script>
+    </body>
+</html>
