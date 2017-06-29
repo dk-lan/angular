@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>过滤器-日期</title>
+    <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+</head>
+<body ng-app>
+	<!--使用ISO标准日期格式 结果为 11/30/2016 9:49AM-->
+    <p>{{ '2016-11-30T09:49:05' | date:"MM/dd/yyyy h:mma" }}</p>
+    <!--使用13位（单位：毫秒）时间戳 结果为 05/20/2015 6:52AM-->
+    <p>{{ 1432075948123 | date:"MM/dd/yyyy h:mma"}}</p>
+    <!--指定timezone为UTC 结果为 05/19/2015 10:52PM-->
+    <p>{{ 1432075948123 | date:"MM/dd/yyyy h:mma":"UTC"}} </p>
+    <!--结果为 2017年06月28日-->
+    <p>{{'2017-06-28' | date: 'yyyy年MM月dd日'}}</p>
+</body>
+</html>

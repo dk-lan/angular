@@ -4,41 +4,56 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="./libs/angular/angular.min.js"></script>
-        <script type="text/javascript" src="./libs/angular/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+        <script type="text/javascript" src="../libs/angular/angular-sanitize.min.js"></script>
     </head>
     <body>
         <div ng-app="dkApp" >
-            <div ng-controller="dkController">
-                <h1>{{1 + 1}}</h1>
-                <h1>{{2 + 2}}</h1>
-                <img src="./libs/imgs/green.jpg">
-                <img src="{{src}}">
-            </div>
-            <div ng-controller="dkController1">
-                <img :src="src" :flag="1 == 1 ? 'a': 'b'" />
-                <img src="{{src}}" flag="{{1 == 1 ? 'a': 'b'}}"/>
-                <h1 ng-bind="1 + 1"></h1>
-                <div ng-bind-html="html"></div>
-                <input type="button" name="" value="click" ng-click="say(1, $event)">
-            </div>            
+            <fieldset>
+                <legend><h3>表达式 {{}}</h3></legend>
+                <div ng-init="src = '../libs/imgs/green.jpg'">
+                    <span>1 + 1 = {{1 + 1}}</span>
+                    <img src="{{src}}">
+                </div>                
+            </fieldset>
+            <fieldset>
+                <legend><h3>ng-bind</h3></legend>
+                <div >
+                    <h1 ng-bind="'1 + 1 =' + (1 + 1)">{{10 + 10}}</h1>
+                </div>                 
+            </fieldset>
+            <fieldset>
+                <legend><h3>ng-bind-html</h3></legend>
+                <div ng-init="html = '<h1>AngularJS1.5</h1>'">
+                    <div ng-bind-html="html"></div>
+                </div>                 
+            </fieldset> 
+            <fieldset>
+                <legend><h3>ng-model</h3></legend>
+                <div >
+                    <input type="text" ng-model="model">
+                    <h1 ng-bind="model"></h1>
+                </div>                 
+            </fieldset>   
+            <fieldset>
+                <legend><h3>ng-bind-template</h3></legend>
+                <div ng-init="myObj = {name: 'DK', age: 18}">
+                    <h1 ng-bind-template="This is {{myObj.name}}, I'm {{myObj.age}} years old"></h1>
+                    <h1 ng-bind="'This is' + myObj.name + ', I am ' + myObj.age + ' years old'"></h1>
+                    <h1>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+                </div>                
+            </fieldset>    
+            <fieldset>
+                <legend><h3>ng-non-bindable</h3></legend>
+                <div ng-init="myObj = {name: 'DK', age: 18}">
+                    <h1>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+                    <h1 ng-non-bindable>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+                </div>               
+            </fieldset>                              
         </div>
 
         <script type="text/javascript">
-            //*****
-            var dkApp = angular.module('dkApp', ['ngSanitize']);
-            //*****
-            dkApp.controller('dkController', ['$scope', function($scope){
-                $scope.src= "./libs/imgs/green.jpg";
-            }])
-
-            dkApp.controller('dkController1', ['$scope', function($scope){
-                $scope.src= "./libs/imgs/red.jpg";
-                $scope.html = "<h1>123</h1>";
-                $scope.say = function(n, event){
-                    console.log(event.target)
-                }
-            }])            
+            var dkApp = angular.module('dkApp', ['ngSanitize']);          
         </script>
     </body>
 </html>

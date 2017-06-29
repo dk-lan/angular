@@ -35,3 +35,47 @@ AngularJS 的指令是带有前缀 ng- 的元素属性。
 ```
 
 
+### ng-bind
+数据绑定，效果等同于 {{}}，不过前者权利高于后者
+```html
+    <!--结果输出：1 + 1 = 2 -->
+    <h1 ng-bind="'1 + 1 =' + (1 + 1)">{{10 + 10}}</h1>
+```
+
+### ng-bind-html
+用于输出 HTML 标签，在使用前要先引入 angular-sanitize.min.js，然后在定义 ng-app 模块的时候要添加依赖注入 ngSanitize
+```html
+    <div ng-init="html = '<h1>AngularJS1.5</h1>'">
+        <div ng-bind-html="html"></div>
+    </div> 
+```
+```javascript
+    var dkApp = angular.module('dkApp', ['ngSanitize']);
+```
+
+### ng-model
+双向绑定，但仅限于表单元素。
+```html
+    <input type="text" ng-model="model">
+    <h1 ng-bind="model"></h1>
+```
+
+### ng-bind-template
+字符串模版绑定，和 ng-bind  类似，不一样的是 ng-bind 在表达式中如果有字符串要添加引号，而 ng-bind-template 不需要。
+```html
+    <div ng-init="myObj = {name: 'DK', age: 18}">
+        <h1 ng-bind-template="This is {{myObj.name}}, I'm {{myObj.age}} years old"></h1>
+        <h1 ng-bind="'This is' + myObj.name + ', I am ' + myObj.age + ' years old'"></h1>
+        <h1>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+    </div>
+```
+
+### ng-non-bindable
+不执行 {{expression}} 表达式。
+```html
+    <div ng-init="myObj = {name: 'DK', age: 18}">
+        <h1>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+        <h1 ng-non-bindable>This is {{myObj.name}}, I'm {{myObj.age}} years old</h1>
+    </div>
+```
+[效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/directive/directive.html?_blank)

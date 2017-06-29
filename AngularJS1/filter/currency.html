@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>过滤器-货币</title>
+    <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+</head>
+<body ng-app>
+    <!--将12格式化为货币，默认单位符号为 '$', 小数默认2位 => $12.00-->
+    <p>{{ 12 + 12 | currency}}</p>
+    <!--将12.45格式化为货币，使用自定义单位符号为 '￥', 小数默认2位-->
+    <p>{{ 12.45 | currency:'￥'}}</p>
+    <!--将12.45格式化为货币，使用自定义单位符号为 'CHY￥', 小数指定1位, 会执行四舍五入操作 -->
+    <p>{{ 12.45 | currency:'CHY￥':1}} </p>
+    <!--将12.55格式化为货币， 不改变单位符号， 小数部分将四舍五入 -->
+    <p>{{ 12.55 | currency:undefined:2}} </p>
+</body>
+</html>
