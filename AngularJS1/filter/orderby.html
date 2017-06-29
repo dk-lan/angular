@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>排序</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app>
+        <div ng-init="myArr = [{name:'Tom1', age:20, deposit: 300}, {name:'Tom2', age:22, deposit: 200}, {name:'Tom3', age:50, deposit: 200}, {name:'May', age:21, deposit: 300}, {name:'Jack', age:20, deposit:100}, {name:'Alice', age:22, deposit: 150}]">
+            <!--['name', '-deposit'] 多个表示如果前者结果一样的情况下就按后 -->
+            <!--deposit前面的'-'表示deposit这列倒叙排序，默认为顺序排序, 参数reverseOrder：true表示结果集倒叙显示-->
+            <!--limitTo: 限制要显示的长度，支持两个参数，第一个参数为显示的长度，第二个参数为从第几个下标开始-->
+            <!--(page - 1) * row -->
+            <input type="number" ng-model="row"/>
+            <div ng-repeat="u in myArr | orderBy: ['-name']">
+                <p>Name:{{u.name}}</p>
+                <p>Deposit:{{u.deposit}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+
+            <div dk-for="obj in myAyy"></div>
+        </div>
+
+        <script>
+            // var repeats = $('[dk-for]');
+            // $.each(repeats, function(){
+            //     var element = $(this);
+            //     var dkFor = $(this).attr('dk-for');
+            //     var dkFors = dkFor.split(' ');
+            //     var array = dkFors[dkFors.length];
+            //     $.each(array, function(){
+            //         element.clone()
+            //     })
+            // })
+        </script>
+    </body>
+</html>

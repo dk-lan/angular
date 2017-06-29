@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>数组过滤器</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <mark>用法1（参数 expression 使用 String）</mark>
+        <div ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr" ng-if="u.name.indexOf('o') > -1">
+                <p>Name:{{u.name}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+        </div>
+        <mark>用法2（参数 expression 使用 object）</mark>
+        <div ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr | filter: {age: 20}">
+                <p>Name:{{u.name}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+        </div>
+        <mark>用法3（参数 expression 使用 function）</mark>
+        <div ng-controller="myCtr1" ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr | filter: myFilter">
+                <p>Name:{{u.name}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+        </div>
+        <script type="text/javascript">
+            var app = angular.module('myApp', []);
+            app.controller('myCtr1', function ($scope) {
+
+                $scope.myFilter = function (item) {
+                    //return item.age == 20;
+                    if (item.age == 22) {
+                        return item;
+                    }
+                }
+            })
+        </script>
+        <mark>用法4（指定 comparator = (true || false)）</mark>
+        <div ng-init="myArr4 = [{name:'我是英雄', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            Name: <input type="text" ng-model="name4"/>
+            <!-- 指定comparator为false或者undefined，即为默认值可不传，将以大小写不敏感的方式匹配任意内容 -->
+            <!-- 可以试试把下面代码的comparator为true，true即大小写及内容均需完全匹配 -->
+            <!-- comparator => false(defalut) => 模糊查询 | true => 精确定查询 -->            
+            <div ng-repeat="u in myArr | filter: {name: name4} : false">
+                <p>Name:{{u.name}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+        </div>
+        <mark>用法5（指定 comparator 为 function）</mark>
+        <div  ng-controller="myCtr5" ng-init="myArr5 = [{name:'我是英雄', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            Name: <input type="text" ng-model="name5"/>
+            <!-- 指定comparator为false或者undefined，即为默认值可不传，将以大小写不敏感的方式匹配任意内容 -->
+            <!-- 可以试试把下面代码的comparator为true，true即大小写及内容均需完全匹配 -->
+            <!-- comparator => false(defalut) => 模糊查询 | true => 精确定查询 -->            
+            <div ng-repeat="u in myArr5 | filter: {name: name5} : myComparator">
+                <p>Name:{{u.name}}</p>
+                <p>Age:{{u.age}}</p>
+                <br />
+            </div>
+            <script type="text/javascript">
+                app.controller('myCtr5', function ($scope) {
+
+                    $scope.myComparator = function (arg1, arg2) {
+                        console.log(arg2)
+                        return arg1 == arg2;
+                    }
+                })
+            </script>
+        </div>        
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>自定义过滤器</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myCtroller">
+        <h1 ng-repeat="n in [] | range: 10">{{$index + 1}}</h1>
+        <script type="text/javascript">
+            var app = angular.module('myApp', []);
+            app.controller('myCtroller', ['$scope', '$http', function($scope, $http){
+                $scope.my = 10;
+                $scope.myObj =  {name: 'Tom1', age: 20};
+                // $scope.myArr = [
+                //     {name: 'Tom1', age: 20},
+                //     {name: 'Tom2', age: 21},
+                //     {name: 'Tom3', age: 22},
+                // ]
+            }])
+
+            app.filter('range', function(){
+                return function(_array, _n){
+                    for(var i = 0; i < _n; i++){
+                        _array.push(i);
+                    }
+                    return _array;
+                }
+            })
+        </script>
+    </body>
+</html>
