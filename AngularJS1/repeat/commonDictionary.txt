@@ -1,0 +1,29 @@
+{
+    "indexid": {
+        "cn": "编号10", "en": "Index ID"
+    },
+    "account": {
+        "cn": "帐户", "en": "Account"
+    },
+    "password": {
+        "cn": "密码", "en": "PassWord"
+    }, 
+    "phone": {
+        "cn": "手机号", "en": "Phone"
+    },
+    "mail": {
+        "cn": "邮箱", "en": "Mail"
+    },
+    "username": {
+        "cn": "用户名", "en": "User Name"
+    },
+    "projectname": {
+        "cn": "项目名称", "en": "Project Name"
+    },
+    "createtime": {
+        "cn": "创建时间", "en": "Create Time"
+    },
+    "updatetime": {
+        "cn": "修改时间", "en": "Update Time"
+    }
+}

@@ -11,13 +11,13 @@
                 <tr>
                     <th>行号</th>
                     <!--v-for="(value, key) in dataset[0]"-->
-                    <th ng-repeat="(key, value) in dataset[0]" ng-bind="key"></th>
+                    <th ng-repeat="(key, value) in dataset[0]" ng-bind="commonDictionary && commonDictionary[key] && commonDictionary[key][lan] ? commonDictionary[key][lan] : key" ng-if="cols.length < 1 || cols.indexOf(key) > -1"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="obj in dataset | filter: myFilter">
                     <td ng-bind="$index + 1"></td>
-                    <td ng-repeat="(key, value) in obj" ng-bind="key == 'sex' ? (value == 1 ? '男' : '女') : value"></td>
+                    <td ng-repeat="(key, value) in obj"  ng-if="cols.length < 1 || cols.indexOf(key) > -1" ng-bind="key == 'sex' ? (value == 1 ? '男' : '女') : value"></td>
                 </tr>
             </tbody>
         </table>             

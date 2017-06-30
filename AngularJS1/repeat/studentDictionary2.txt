@@ -1,0 +1,5 @@
+{
+    "account": {
+        "cn": "登陆名称", "en": "Account"
+    }
+}
