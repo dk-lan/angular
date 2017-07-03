@@ -52,4 +52,4 @@ AngularJS 的表达式是写在双花括号当中：{{expression}}，表达式�
     </body> 
 </html>    
 ```
-[效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/expression.html?_blank)
+[效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/expression.html)
