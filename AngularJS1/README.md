@@ -3,10 +3,10 @@
 
 # 技术目录
 - 作用域和表达式
-- [控制器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/controller){:target="_blank"}
-- [指令](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/directive){:target="_blank"}
+- [控制器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/controller)
+- [指令](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/directive)
 - 循环
-- [过滤器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/filter){:target="_blank"}
+- [过滤器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/filter)
 - 表单
 - 依赖注入
 - 服务
