@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <input type="text" ng-model="qrcode">
+        <input type="text" ng-model="proname">
+        <select ng-model="category">
+            <option value="{{obj.indexid}}" ng-repeat="obj in category" ng-bind="obj.category"></option>
+        </select>
+        <select ng-model="supplier">
+            <option value="{{obj.indexid}}" ng-repeat="obj in supplier" ng-bind="obj.suppliername"></option>
+        </select>
+
+        <script>
+            var app = angular.moudle('myApp', []);
+            app.controller('myController', ['$scope', '$http', function($scope, $http){
+                $http.get('category').success(function(response){
+                    $scope.category = response;  
+                })
+                $http.get('supplier').success(function(response){
+                    $scope.supplier = response;  
+                })                
+            }])
+        </script>
+    </body>
+</html>
