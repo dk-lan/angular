@@ -12,28 +12,13 @@
             <!--deposit前面的'-'表示deposit这列倒叙排序，默认为顺序排序, 参数reverseOrder：true表示结果集倒叙显示-->
             <!--limitTo: 限制要显示的长度，支持两个参数，第一个参数为显示的长度，第二个参数为从第几个下标开始-->
             <!--(page - 1) * row -->
-            <input type="number" ng-model="row"/>
-            <div ng-repeat="u in myArr | orderBy: ['-name']">
+            <label><span>要显示的行数：</span><input type="number" ng-model="row"/></label>
+            <div ng-repeat="u in myArr | orderBy: ['name', '-deposit'] | limitTo: row">
                 <p>Name:{{u.name}}</p>
                 <p>Deposit:{{u.deposit}}</p>
                 <p>Age:{{u.age}}</p>
                 <br />
             </div>
-
-            <div dk-for="obj in myAyy"></div>
         </div>
-
-        <script>
-            // var repeats = $('[dk-for]');
-            // $.each(repeats, function(){
-            //     var element = $(this);
-            //     var dkFor = $(this).attr('dk-for');
-            //     var dkFors = dkFor.split(' ');
-            //     var array = dkFors[dkFors.length];
-            //     $.each(array, function(){
-            //         element.clone()
-            //     })
-            // })
-        </script>
     </body>
 </html>

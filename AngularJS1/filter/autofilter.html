@@ -11,13 +11,6 @@
         <script type="text/javascript">
             var app = angular.module('myApp', []);
             app.controller('myCtroller', ['$scope', '$http', function($scope, $http){
-                $scope.my = 10;
-                $scope.myObj =  {name: 'Tom1', age: 20};
-                // $scope.myArr = [
-                //     {name: 'Tom1', age: 20},
-                //     {name: 'Tom2', age: 21},
-                //     {name: 'Tom3', age: 22},
-                // ]
             }])
 
             app.filter('range', function(){

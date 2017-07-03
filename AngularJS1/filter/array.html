@@ -8,24 +8,24 @@
     </head>
     <body ng-app="myApp">
         <mark>用法1（参数 expression 使用 String）</mark>
-        <div ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
-            <div ng-repeat="u in myArr" ng-if="u.name.indexOf('o') > -1">
+        <div ng-init="myArr1 = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr1" ng-if="u.name.indexOf('o') > -1">
                 <p>Name:{{u.name}}</p>
                 <p>Age:{{u.age}}</p>
                 <br />
             </div>
         </div>
         <mark>用法2（参数 expression 使用 object）</mark>
-        <div ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
-            <div ng-repeat="u in myArr | filter: {age: 20}">
+        <div ng-init="myArr2 = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr2 | filter: {age: 20}">
                 <p>Name:{{u.name}}</p>
                 <p>Age:{{u.age}}</p>
                 <br />
             </div>
         </div>
         <mark>用法3（参数 expression 使用 function）</mark>
-        <div ng-controller="myCtr1" ng-init="myArr = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
-            <div ng-repeat="u in myArr | filter: myFilter">
+        <div ng-controller="myCtr1" ng-init="myArr3 = [{name:'Tom', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
+            <div ng-repeat="u in myArr3 | filter: myFilter">
                 <p>Name:{{u.name}}</p>
                 <p>Age:{{u.age}}</p>
                 <br />
@@ -36,7 +36,6 @@
             app.controller('myCtr1', function ($scope) {
 
                 $scope.myFilter = function (item) {
-                    //return item.age == 20;
                     if (item.age == 22) {
                         return item;
                     }
@@ -49,7 +48,7 @@
             <!-- 指定comparator为false或者undefined，即为默认值可不传，将以大小写不敏感的方式匹配任意内容 -->
             <!-- 可以试试把下面代码的comparator为true，true即大小写及内容均需完全匹配 -->
             <!-- comparator => false(defalut) => 模糊查询 | true => 精确定查询 -->            
-            <div ng-repeat="u in myArr | filter: {name: name4} : false">
+            <div ng-repeat="u in myArr4 | filter: {name: name4} : false">
                 <p>Name:{{u.name}}</p>
                 <p>Age:{{u.age}}</p>
                 <br />
@@ -58,9 +57,9 @@
         <mark>用法5（指定 comparator 为 function）</mark>
         <div  ng-controller="myCtr5" ng-init="myArr5 = [{name:'我是英雄', age:20}, {name:'Tom Senior', age:50}, {name:'May', age:21}, {name:'Jack', age:20}, {name:'Alice', age:22}]">
             Name: <input type="text" ng-model="name5"/>
-            <!-- 指定comparator为false或者undefined，即为默认值可不传，将以大小写不敏感的方式匹配任意内容 -->
-            <!-- 可以试试把下面代码的comparator为true，true即大小写及内容均需完全匹配 -->
-            <!-- comparator => false(defalut) => 模糊查询 | true => 精确定查询 -->            
+            <!-- 过滤器：filter: object : comparator，第二个参数 comparator 的类型可为 function。 -->
+            <!-- function 授受 2 个参数，第一个参数为过滤对象的属性，如 filter: {name: 'test'}，则是对象的 name 属性-->
+            <!-- 第 2 个参数为对应属性的值 -->            
             <div ng-repeat="u in myArr5 | filter: {name: name5} : myComparator">
                 <p>Name:{{u.name}}</p>
                 <p>Age:{{u.age}}</p>
@@ -68,9 +67,10 @@
             </div>
             <script type="text/javascript">
                 app.controller('myCtr5', function ($scope) {
-
+                    //arg1 为每次循环对象的指定属性，在这里是 name
+                    //arg2 为属性值，这里指 $scope.name5
+                    //结果要过滤对象 name = $scope.name5 的对象                    
                     $scope.myComparator = function (arg1, arg2) {
-                        console.log(arg2)
                         return arg1 == arg2;
                     }
                 })
