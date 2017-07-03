@@ -51,7 +51,7 @@
     <!--将结果格式化为小写，结果为 china--> 
     <h1>{{"CHINA" | lowercase}}</h1>
     <!--将结果转为标准的 JSON 格式字符串，结果为 { "name": "Jack", "age": 21 }-->
-    <h1>{{ {name:'Jack', age: 21} | json}}</h1>
+    <!--<h1>{{ {name:'Jack', age: 21} | json}}</h1>-->
 </body>
 ```
 [效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/filter/string.html?_blank)
