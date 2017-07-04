@@ -9,14 +9,14 @@ CommonApp.filter('range', function(){
     }
 })
 
-CommonApp.value('defaultValue', function(){
-    return Math.random();
-});
-
-CommonApp.value('baseUrl', function(){
+//以 function 方式定义，使用时 baseUrl1()
+CommonApp.value('baseUrl1', function(){
     return 'http://localhost:81/';
 })
+//以常量的方式定义，使用时 baseUrl2
+CommonApp.value('baseUrl2', 'http://localhost:81/')
 
+//求平方和
 CommonApp.factory('calcFactory', function(){
     return {
         square: function(){
@@ -28,5 +28,16 @@ CommonApp.factory('calcFactory', function(){
         },
         increment: function(){},
         decrement: function(){}
+    }
+})
+
+//求平方和
+CommonApp.service('calcService', function(){
+    this.square = function(){
+        var result = 0;
+        for(var i = 0; i < arguments.length; i++){
+            result += arguments[i] * arguments[i];
+        }
+        return result;
     }
 })

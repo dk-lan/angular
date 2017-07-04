@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>依赖注入-Provide</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <div>
+            <span>运算符：{{symbol}} </span>
+            <h1>{{baseUrl}}</h1>
+        </div>
+        <input type="text" ng-model="num1" ng-change="calc()"/> {{symbol}} 
+        <input type="text" ng-model="num2" ng-change="calc()" /> = {{result}}
+
+        <script type="text/javascript">
+            var CommonApp = angular.module('CommonApp', []);
+            //定义一个 provider，名叫 calcProvider
+            CommonApp.provider('calcProvider', function(){
+                //定义一个运算符，这个案例以加和减两种运算来说明
+                //默认为加运算
+                //此属性只能在 config 中访问
+                this.symbol = '+';
+                //此方法的返回值只能被控制器访问
+                this.$get = function(){
+                    return {
+                        symbol: this.symbol,
+                        operation: function(n1, n2){
+                            var result = 0;                         
+                            switch(this.symbol){
+                                case '+':
+                                    result = n1 * 1 + n2 * 1;
+                                    break;
+                                default :     
+                                    result = n1 * 1 - n2 * 1;
+                                    break;                                                                   
+                            }
+                            return result;
+                        }.bind(this)
+                    }
+                }.bind(this)
+            })
+
+            //依赖注入
+            var app = angular.module('myApp', ['CommonApp']);
+
+            //配置 providername + Provider => calcProvider + Provider = calcProviderProvider
+            app.config(function(calcProviderProvider){
+                calcProviderProvider.symbol = '-';
+            })
+            app.controller('myController', ['calcProvider', '$scope', function(calcProvider, $scope){
+                $scope.num1 = 0;
+                $scope.num2 = 0;
+                $scope.symbol = calcProvider.symbol;
+                $scope.result = calcProvider.operation($scope.num1, $scope.num2);
+                $scope.calc = function () {
+                    $scope.result = calcProvider.operation($scope.num1, $scope.num2);
+                }                
+            }])
+        </script>
+    </body>   
+</html>

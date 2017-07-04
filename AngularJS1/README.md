@@ -5,13 +5,12 @@
 - 作用域和表达式
 - [控制器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/controller)
 - [指令](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/directive)
-- 循环
 - [过滤器](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/filter)
-- 表单
-- 依赖注入
+- [依赖注入](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/dependence)
 - 服务
 - 自定义指令
 - 路由
+- 项目应用
 
 # 作用域和表达式
 

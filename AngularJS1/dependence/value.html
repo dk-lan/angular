@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>依赖注入-Value</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <p>baseUrl1：{{baseUrl1}}</p>
+        <p>baseUrl2：{{baseUrl2}}</p>
+        <p>baseUrl3：{{baseUrl3}}</p>
+        <p>baseUrl4：{{baseUrl4}}</p>
+
+        <script type="text/javascript">
+            var CommonApp = angular.module('CommonApp', []);
+
+            //方式1：以 function 方式定义，使用时 baseUrl1()
+            CommonApp.value('baseUrl1', function(){
+                return 'http://localhost:81/';
+            })
+            //方式2：以常量的方式定义，使用时 baseUrl2
+            CommonApp.value('baseUrl2', 'http://localhost:81/')
+
+            //方式3
+            CommonApp.config(function($provide){
+                $provide.value('baseUrl3', 'http://localhost:81/');
+            })
+
+            //方式4
+            CommonApp.config(function($provide){
+                $provide.value('baseUrl4', function(){
+                    return 'http://localhost:81/';
+                });
+            })
+
+            var app = angular.module('myApp', ['CommonApp']);
+            app.controller('myController', ['$scope', 'baseUrl1', 'baseUrl2', 'baseUrl3', 'baseUrl4',function($scope, baseUrl1, baseUrl2, baseUrl3, baseUrl4){
+                $scope.baseUrl1 = baseUrl1();
+                $scope.baseUrl2 = baseUrl2;
+                $scope.baseUrl3 = baseUrl3;
+                $scope.baseUrl4 = baseUrl4();
+            }])
+        </script>
+    </body>
+</html>

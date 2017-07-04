@@ -32,6 +32,16 @@ AngularJS 的控制器在 MVC 框架中扮演着 C 层的角色，主要是对�
     </body>
 </html>
 ```
+当然上面的控制器也可以简写，但这样写会在代码压缩的时候容易出错，一般情况下 JS 代码在压缩的时候会把形参改变，但在 AngularJS 的控制器像这种简写的情况下，形参必须为 $scope，否则就会出错。所以为了避免这种情况，建议用[依赖注入](https://github.com/dk-lan/angularjs-course/tree/master/AngularJS1/dependence)的方式去写。
+```javascript
+var myApp = angular.module('myApp', []);
+myApp.controller('myController', function($scope){
+    $scope.user = {
+        name: 'Tom',
+        age: 22
+    }
+})
+```
 [效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/controller/controller.html?_blank)
 
 根元素 ng-app 可以没有属性值，如果有属性值则一定要在 js 中定义声明，且属性值一定要和声明中的模块名一致。如：

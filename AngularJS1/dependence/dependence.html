@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>依赖注入</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
         <script type="text/javascript" src="common.js"></script>
     </head>
     <body ng-app="myApp" ng-controller="myController">
-        <h2>{{squareResult}}</h2>
         <h1 ng-repeat="n in [] | range: 10">{{$index + 1}}</h1>
  
         <script type="text/javascript">
-            //先定义一个 app 的模块
-            //依赖注入
+            //依赖注入 common.js 定义的模块 CommonApp
+            //如果有多个模块可以在数组中以字符串数组的方式注入多个模块名称
+            //依赖注入的是模块名称，而不是变量名：var app = angular.module('模块名称', [])
+            //依赖注入成功后便可以调用 CommonApp 定义的所有过滤器、服务、指令等
             var app = angular.module('myApp', ['CommonApp']);
 
-            app.controller('myController', ['$scope', '$http', 'calcFactory',function($scope, $http, calcFactory){
-                $scope.squareResult = calcFactory.square(9, 9, 6);
+            app.controller('myController', ['$scope', '$http',function($scope, $http){
             }])
-
-
         </script>
     </body>
 </html>

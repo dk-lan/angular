@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>依赖注入-Service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+        <input type="text" ng-model="num1" ng-change="calc()"/> + 
+        <input type="text" ng-model="num2" ng-change="calc()" /><br/>
+        <p>calcService1：两个数的平方和 = {{result1}}</p> 
+        <p>calcService2：两个数的平方和 = {{result2}}</p> 
+
+        <script type="text/javascript">
+            var CommonApp = angular.module('CommonApp', []);
+            
+            //方式1
+            CommonApp.service('calcService1', function(){
+                this.square = function(){
+                    var result = 0;
+                    for(var i = 0; i < arguments.length; i++){
+                        result += arguments[i] * arguments[i];
+                    }
+                    return result;
+                }
+            })
+
+            //方式2
+            CommonApp.config(function($provide){
+                $provide.service('calcService2', function(){
+                    this.square = function(){
+                        var result = 0;
+                        for(var i = 0; i < arguments.length; i++){
+                            result += arguments[i] * arguments[i];
+                        }
+                        return result;
+                    }                    
+                })                
+            })
+
+            var app = angular.module('myApp', ['CommonApp']);
+
+            app.controller('myController', ['calcService1', 'calcService2', '$scope', function(calcService1, calcService2, $scope){
+                $scope.num1 = 0;
+                $scope.num2 = 0;
+                $scope.calc = function () {
+                    $scope.result1 = calcService1.square($scope.num1, $scope.num2);
+                    $scope.result2 = calcService2.square($scope.num1, $scope.num2);
+                }    
+                $scope.calc();            
+            }])
+        </script>
+    </body>
+</html>
