@@ -45,13 +45,13 @@
 ## string
 字符串过滤器
 ```html
-<body ng-app>
+<body ng-app ng-init="myObj = {name:'Jack', age: 21}">
     <!--将结果格式化为大写，结果为 CHINA-->
     <h1>{{"china" | uppercase}}</h1>
     <!--将结果格式化为小写，结果为 china--> 
     <h1>{{"CHINA" | lowercase}}</h1>
     <!--将结果转为标准的 JSON 格式字符串，结果为 { "name": "Jack", "age": 21 }-->
-    <h1>{{ {name:'Jack', age: 21} | json}}</h1>
+    <h1>{{ myObj | json}}</h1>
 </body>
 ```
 [效果预览](https://dk-lan.github.io/angularjs-course/AngularJS1/filter/string.html)
