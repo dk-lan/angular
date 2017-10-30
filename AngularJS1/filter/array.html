@@ -71,6 +71,7 @@
                     //arg2 为属性值，这里指 $scope.name5
                     //结果要过滤对象 name = $scope.name5 的对象                    
                     $scope.myComparator = function (arg1, arg2) {
+                        console.log(arguments)
                         return arg1 == arg2;
                     }
                 })

@@ -7,7 +7,7 @@
         <script type="text/javascript" src="../libs/angular/angular.min.js"></script>
     </head>
     <body ng-app="myApp" ng-controller="myCtroller">
-        <h1 ng-repeat="n in [] | range: 10">{{$index + 1}}</h1>
+        <h1 ng-repeat="n in [] | range: 5">{{$index + 1}}</h1>
         <script type="text/javascript">
             var app = angular.module('myApp', []);
             app.controller('myCtroller', ['$scope', '$http', function($scope, $http){
