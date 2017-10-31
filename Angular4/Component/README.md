@@ -3,6 +3,7 @@
 在 `./src/app` 目录下手动创建或者在 Angular-CLI 中用命令
 `ng g c [component-name] -it -is # 表示新建组件，该组件使用内联模板和内联样式`
 执行上面命令后会在 `./src/app` 目录下自动创建对应的组件目录和组件文件，同时会修改 `src/app/app.module.ts` 文件，将新建的组件添加到 `@NgModule` 的 `declarations` 数组中。  
+
 2. 编写组件代码
 ```javascript
 //加载组件装饰器
@@ -20,7 +21,7 @@ export class AppComponent {
   title = 'Tour of Heroes'; //定义变量
 }
 ```
-`templateUrl template` 和 `styleUrls` 和 `styles` 两者都只需要存在一个，如果两个都存在的情况下后面的会冲掉上面的，也就是只有后面的起作用。  
+
 3.在根模版 `./src/app.module.ts` 中将指令添加到 `declarations` 数组当中
 ```javascript
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
@@ -31,6 +32,81 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 4.使用组件
 ```html
 <app-root></app-root>
+```
+
+## 组件模板
+在组件装饰器中用 `template` 或 `templateUrl` 来定义组件模板，两者只能出现一个，如果两者同时出现，后者会覆盖前者。
+
+## 组件样式
+在组件装饰器中用 `styles` 或 `styleUrls` 来定义组件样式，两者只能出现一个，如果两者同时出现，后者会覆盖前者。
+
+把样式加入组件有以下几种方式：
+#### styles
+```javascript
+@Component({
+  selector: 'app-root',
+  template: `<h1>App</h1>`,
+  styles: ['h1 { font-weight: normal; }']
+})
+export class AppComponent {
+/* . . . */
+}
+```
+
+#### styleUrls
+```javascript
+@Component({
+  selector: 'app-root',
+  template: `<h1>App</h1>`,
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+/* . . . */
+}
+```
+
+#### 模板内联样式
+```javascript
+@Component({
+  selector: 'app-root',
+  template: `
+    <style>
+      button {
+        background-color: white;
+        border: 1px solid #777;
+      }
+    </style>
+    <h3>Controls</h3>
+    <button (click)="activate()">Activate</button>
+    `
+})
+export class AppComponent {
+/* . . . */
+}
+```
+
+#### 模板中的link标签
+```javascript
+@Component({
+  selector: 'app-root',
+  template: `
+    <link rel="stylesheet" href="assets/app.component.css">
+    <h3>Team</h3>
+    <ul>
+      <li *ngFor="let member of hero.team">
+        {{member}}
+      </li>
+    </ul>
+    `
+})
+export class AppComponent {
+/* . . . */
+}
+```
+
+#### CSS @imports 语法
+```javascript
+@import 'hero-details-box.css';
 ```
 
 ## 组件生命周期
@@ -86,6 +162,156 @@ export class AppComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
 - 可用于监听子组件修改完成。
 
 ## 组件通信
-- 通过 @Input 实现子组件调用父组件
-- 通过 @Output 实现父组件调用子组件
-- 通过服务来通信
+#### 通过 @Input 实现子组件调用父组件  
+
+父组件定义
+```javascript
+import { Component } from '@angular/core';
+
+export class Hero {
+    id: number;
+    name: string;
+}
+
+const HEROES: Hero[] = [
+  { id: 11, name: 'Mr. Nice' },
+  { id: 12, name: 'Narco' },
+  { id: 13, name: 'Bombasto' },
+  { id: 14, name: 'Celeritas' },
+  { id: 15, name: 'Magneta' },
+  { id: 16, name: 'RubberMan' },
+  { id: 17, name: 'Dynama' },
+  { id: 18, name: 'Dr IQ' },
+  { id: 19, name: 'Magma' },
+  { id: 20, name: 'Tornado' }
+];
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent{
+  heroes = HEROES;
+  currHero: Hero;
+
+  selectHero(hero: Hero) {
+    this.currHero = hero;
+  }  
+}
+```
+父组件的 template 并在里面调用子组件
+```html
+<ul class="heroes">
+    <li *ngFor="let hero of heroes" (click)="selectHero(hero)">
+        <span class="badge">{{hero.id}}</span>{{hero.name}}
+    </li>
+</ul>
+<hero *ngIf="currHero" [currHero]="currHero"></hero>
+```
+子组件定义
+```javascript
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'hero',
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.css']
+})
+export class HeroComponent{
+  @Input() currHero: Object;
+}
+```
+子组件的 template
+```html
+<div *ngIf="currHero">
+  <h2>{{currHero.name}} details!</h2>
+  <div><label>id: </label>{{currHero.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="currHero.name" placeholder="name"/>
+  </div>
+</div>
+```
+
+#### 通过 @Output 实现父组件调用子组件
+子组件暴露一个EventEmitter属性，当事件发生时，子组件利用该属性emits(向上弹射)事件。父组件绑定到这个事件属性，并在事件发生时作出回应。
+
+子组件的EventEmitter属性是一个输出属性，通常带有@Output装饰器，就像在VoterComponent中看到的。  
+
+父组件定义
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent{
+  parentEvent(val: Boolean){
+    console.log(val);
+  }
+}
+```
+父组件的 template 并在里面调用子组件
+```html
+<hero (parentAttr)="parentEvent($event)"></hero>
+```
+子组件定义
+```javascript
+import { Component, Output } from '@angular/core';
+
+@Component({
+  selector: 'hero',
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.css']
+})
+export class HeroComponent{
+  @Output() parentAttr = new EventEmitter<Boolean>();
+  childrenEvent(val: Boolean){
+    this.parentAttr.emit(val);
+  }
+}
+```
+子组件的 template
+```html
+<button (click)="childrenEvent(true)">Agree</button>
+```
+
+#### 父组件与子组件通过本地变量互动
+父组件定义
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent{
+  parentEvent(arg1){
+    console.log(arg1);
+  }
+}
+```
+父组件的 template 并在里面调用子组件
+```html
+<button (click)="parentEvent(childrenComponent)">Stop</button>
+<hero #childrenComponent></hero>
+```
+子组件定义
+```javascript
+import { Component, Output } from '@angular/core';
+
+@Component({
+  selector: 'hero',
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.css']
+})
+export class HeroComponent{
+  title = "Children Component";
+}
+```
+
+#### 通过服务来通信

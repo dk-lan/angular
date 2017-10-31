@@ -32,27 +32,51 @@ export class AppComponent {
     }
 }
 ```
-```javascript
-<ul *ngFor="let obj of data; let idx = index">
-    <li>{{idx + '-' + obj.name}}</li>
+``` html
+<ul *ngFor='let obj of data">
+    <li>{{obj.name}}</li>
 </ul>
 ```
-
-其中 `let` 关键字创建了一个名叫 `obj` 的模版输入变量。    
-`let idx = index` 表示在循环的时候会返回一个从零开始的索引值，然后可以通过模板输入变量捕获这个 index 值，并把它用在模板中。  
-
+##### 循环对象
 `*ngFor` 指令默认不支持循环对象，所以如果需要循环的数据源为对象时，可以使用 `Object.keys(item)` 的方法将对象的属性转换成数组。
-```javascript
-<ul *ngFor="let obj of data; let idx = index">
+```html
+<ul *ngFor="let obj of data">
     <li *ngFor="let key of getKeys(obj)">{{key}}</li>
 </ul>
+```
+##### 模板输入变量
+在 `ngFor` 中可以通过  `let` 关键字创建了一个名叫 `obj` 的模版输入变量。  
+ 如 `<ul *ngFor="let obj of data; let idx = index">`  
+模板变量：
+- `let idx = index`
+- `let odd = odd`
+- `let even = even`
+- `let first = first`
+- `let last = last`
+
+##### trackBy
+ngFor指令有时候会性能较差，特别是在大型列表中。对一个条目的一丁点改动、移除或添加，都会导致级联的 DOM 操作。
+
+比如，当通过重新从服务器来刷新通讯录，刷新后的列表可能包含很多以前显示过的联系人。但在 Angular 看来，它不知道哪些是以前就存在过的，只能清理旧列表、舍弃那些DOM元素，并用新的DOM元素来重建一个新列表。  
+
+解决这个问题，可以通过追踪函数来避免这种折腾。追踪函数会告诉 Angular 当重新获取数据时，由于id没有变，Angular 就不会去删除原来的dom，只会更新其中的内容，不同的id再添加新的dom。效率就能提升了
+
+#### ngSwitch
+```html
+<span [ngSwitch]="userName">
+    <span *ngSwitchCase="'张三'">张三</span>
+    <span *ngSwitchCase="'李四'">李四</span>
+    <span *ngSwitchCase="'王五'">王五</span>
+    <span *ngSwitchCase="'赵六'">赵六</span>
+    <span *ngSwitchDefault>龙大</span>
+</span>
 ```
 
 #### 自定义指令
 1. 新建一个 ts 文件，`highlight.directive.ts`
 2. 编写指令代码
 ```javascript
-import {Directive} from '@angular/core';
+import {Directive, ElementRef} from '@angular/core';
 
 @Directive({
     selector: '[hl]'
@@ -96,7 +120,7 @@ import {HighlightDirective} from './directives/highlight.directive';
 
 除了用 `HostListener` 属性装饰器外也可以在指令配置信息中设定：`host: {'(document:click)': 'onClick($event)'}`
 ```javascript
-import {Directive} from '@angular/core';
+import {Directive, ElementRef} from '@angular/core';
 
 @Directive({
     selector: '[hl]',

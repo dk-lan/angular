@@ -13,17 +13,15 @@ Angular CLI 是一个命令行接口(Command Line Interface)，用于实现自�
 - 检测 Angular CLI 是否安装成功 `ng --version`  
 
 ## 使用 Angular CLI
-Angular CLI 为我们提供了两种方式，用于创建新的应用程序：
-- `ng init` 在当前目录创建新的应用程序
-- `ng new [project-name]` 创建新的目录，然后在新建的目录中运行 ng init 命令
-假设还没有目录，那可以用`ng new`命令来创建新的项目：
-1. `ng new [project-name]`
+1. `ng new [project-name]` 创建新的项目
 2. `cd project-name`
 3. `ng server` 启动本地服务器，默认端口为 4200
 4. `ng serve --host 0.0.0.0 --port 4201` 可配置端口
 5. 使用`--open`（或`-o`）参数可以自动打开浏览器并访问http://localhost:4200/
 
 ## 常用的 Angular CLI 命令
+用命令创建的时候可以添加路径，比如：
+`ng g c ./components/hero` 则会在 `./src/app` 目录下自动创建（如果已存在则不会创建）目录 components，再在这个目录下创建对应的组件 hero。
 <table>
     <thead>
         <tr>
