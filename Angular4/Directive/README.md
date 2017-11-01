@@ -60,6 +60,16 @@ ngFor指令有时候会性能较差，特别是在大型列表中。对一个条
 比如，当通过重新从服务器来刷新通讯录，刷新后的列表可能包含很多以前显示过的联系人。但在 Angular 看来，它不知道哪些是以前就存在过的，只能清理旧列表、舍弃那些DOM元素，并用新的DOM元素来重建一个新列表。  
 
 解决这个问题，可以通过追踪函数来避免这种折腾。追踪函数会告诉 Angular 当重新获取数据时，由于id没有变，Angular 就不会去删除原来的dom，只会更新其中的内容，不同的id再添加新的dom。效率就能提升了
+```javascript
+trackByName(index, obj) {
+    return obj.name;
+}
+```
+```html
+<ul *ngFor="let obj of data; trackBy:trackByName">
+    <span>{{obj.name}}</span>
+</ul>
+```
 
 #### ngSwitch
 ```html

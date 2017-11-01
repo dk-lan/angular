@@ -57,6 +57,15 @@ export class AppComponent {
 ```
 
 #### 双向绑定
+该指令用于表单元素，所以在使用的时候要在根模块中 `./src/app/app.module.ts` 添加表单模块 `FormsModule`
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+
+@NgModule({
+    imports: [FormsModule, BrowserModule]
+})
+```
 ```html
 <input type="text" [(ngModel)]="name" />
 ```

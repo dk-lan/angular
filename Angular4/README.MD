@@ -9,6 +9,7 @@ Angular 没有 3.0 的原因是为了和路由统一版本号。
 - [模版语法](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/TemplateSyntax)
 - [组件](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/Component)
 - [指令](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/Directive)
+- [HTTP 服务](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/HTTP)
 
 - 路由介绍
 - 路由基础
@@ -47,6 +48,6 @@ Angular 没有 3.0 的原因是为了和路由统一版本号。
 - 模板式表单校验
 - 表单处理实战
 - Web 服务器
-- HTTP 通信
+
 - WebSocket 通信
 - 项目实战
