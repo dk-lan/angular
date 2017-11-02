@@ -10,6 +10,7 @@ Angular 没有 3.0 的原因是为了和路由统一版本号。
 - [组件](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/Component)
 - [指令](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/Directive)
 - [HTTP 服务](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/HTTP)
+- [管道](https://github.com/dk-lan/angularjs-course/tree/master/Angular4/Pipes)
 
 - 路由介绍
 - 路由基础

@@ -62,12 +62,59 @@ export class AppComponent implements OnInit{
     } 
 
     ngOnInit() {
-        this.http.get('http://cterp/api/dispatch/offers/FetchApply?pageindex=1&pagesize=10').toPromise().then(response => {
+        this.http.get('api').toPromise().then(response => {
             console.log(response.json());
         }).catch((error) => {
             console.log(error);
             return Promise.reject(error);
         });    
+    }       
+}
+```
+
+#### 传参数
+```javascript
+import { Component} from '@angular/core';
+import { Http, Response, Headers, RequestOptions, URLSearchParams, RequestOptionsArgs, RequestMethod } from '@angular/http';
+//貌似现在最新本已一起打包发布了，所以并不需要这一步
+import 'rxjs/add/operator/toPromise';
+
+@Component({
+  selector: 'app-root',
+  template: '<h1>{{title}}</h1>',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+export class AppComponent implements OnInit{
+    constructor(private http: Http) {
+    } 
+
+    ngOnInit() {
+      //get
+        this.http.request('api', new RequestOptions({
+          method: RequestMethod.Get,
+          search: {name: ''}
+        })).toPromise().then(response => {
+            console.log(response.json());
+        }).catch((error) => {
+            console.log(error);
+            return Promise.reject(error);
+        });   
+
+      //get
+        this.http.request('api', new RequestOptions({
+          method: RequestMethod.Post,
+          body: {name: ''},
+          headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          })
+        })).toPromise().then(response => {
+            console.log(response.json());
+        }).catch((error) => {
+            console.log(error);
+            return Promise.reject(error);
+        });          
     }       
 }
 ```
