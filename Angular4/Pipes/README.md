@@ -31,7 +31,7 @@
 #### 数值格式化
 number | 'n1.n2-n3'  
 - n1: 最少位整数位，不够补0，默认1
-- n2：最少保留几个小数，不够被0，默认0
+- n2：最少保留几个小数，不够补0，默认0
 - n3：最多保留几个小数，默认3
 ```html
 <div>
@@ -58,7 +58,7 @@ number | 'n1.n2-n3'
     <p>The custom date is {{today | date:'yyyy-mm-dd HH:mm a z':'+0900'}}</p>
 
     <!--output '2015-06-15 09:03 AM GMT+9'-->
-    <p>The custom date with fixed timezone is {{fixedTimezone | date:'yyyy年mm月dd目 HH:mm a z':'+0900'}}</p>
+    <p>The custom date with fixed timezone is {{fixedTimezone | date:'yyyy年MM月dd目 HH:mm a z':'+0900'}}</p>
   </div>`
 })
 export class DatePipeComponent {
