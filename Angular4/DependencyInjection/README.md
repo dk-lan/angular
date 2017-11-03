@@ -8,7 +8,7 @@ export class DictionayService {
     lan: String = "cn";
 }
 ```
-在根模块依赖注入 -- ./scr/app/app.module.ts
+在根模块依赖注入 -- ./scr/app/app.module.ts  
 ```javascript
 import {DictionayService} from './service/dictionary.service.ts'
 @NgModule({
