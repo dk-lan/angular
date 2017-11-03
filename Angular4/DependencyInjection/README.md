@@ -13,7 +13,7 @@ export class DictionayService {
 import {DictionayService} from './service/dictionary.service.ts'
 @NgModule({
     providers: [
-        DictionayService
+        DictionayService 
     ]
 })
 ```
