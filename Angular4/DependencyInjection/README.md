@@ -12,7 +12,7 @@ export class DictionayService {
 ```javascript
 import {DictionayService} from './service/dictionary.service.ts'
 @NgModule({
-    imports: [
+    providers: [
         DictionayService
     ]
 })
