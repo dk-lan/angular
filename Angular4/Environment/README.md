@@ -18,7 +18,7 @@ Angular CLI 是一个命令行接口(Command Line Interface)，用于实现自�
 3. `ng serve` 启动本地服务器，默认端口为 4200
 4. `ng serve --host 0.0.0.0 --port 4201` 可配置端口
 5. 使用`--open`（或`-o`）参数可以自动打开浏览器并访问http://localhost:4200/
-6. 5. 使用`--open`（或`-o`）参数可以自动打开浏览器并访问http://localhost:4200/
+
 
 ## 常用的 Angular CLI 命令
 用命令创建的时候可以添加路径，比如：
@@ -41,11 +41,6 @@ Angular CLI 是一个命令行接口(Command Line Interface)，用于实现自�
             <td>ng g c my-new-component</td>
         </tr>        
         <tr>
-            <td>新建指令 (Directive)</td>
-            <td>ng generate directive my-new-directive</td>
-            <td>ng g d my-new-directive</td>
-        </tr>
-            <tr>
             <td>新建指令 (Directive)</td>
             <td>ng generate directive my-new-directive</td>
             <td>ng g d my-new-directive</td>
